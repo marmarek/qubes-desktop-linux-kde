@@ -2,14 +2,20 @@
 
 %if 0%{?qubes_builder}
 %define _sourcedir %(pwd)/qubes-kde-dom0
-%define qubes_kde_dom0_version %(cat version)
 %endif
-%{!?version: %define version %(cat version)}
-
 
 Name:    qubes-kde-dom0
 Summary: Metapackage for installing all KDE components needed for Qubes Dom0
-Version: %{qubes_kde_dom0_version}
+
+# Arbitrarily choose 5.0 as the version, as some KDE packages seem to have different
+# versioning schemes. 5.0 and above should be fine for Qubes OS upgrades to releases
+# above r3.1 as Qubes OS r3.1 had 4.12.3 as the qubes-kde-dom0 package version.
+#
+# Example KDE package versions from Fedora 23 as of 2016-04-12:
+#   plasma-desktop 5.4.2
+#   kf5-plasma 5.21.0
+#   kde-runtime 15.12.3
+Version: 5.0
 Release: 1%{?dist}
 
 License: GPL2
@@ -17,21 +23,18 @@ URL: http://qubes-os.org
 
 BuildArch: noarch
 
-Requires: kde-filesystem
-Requires: kde-settings
-Requires: kde-settings-kdm
-Requires: kdelibs >= %{version}
-Requires: kde-workspace
-Requires: kde-workspace-libs
-#Requires: kde-workspace-wallpapers
-Requires: kde-runtime >= %{version}
-Requires: kde-runtime-libs >= %{version}
-Requires: kde-runtime-flags >= %{version}
-Requires: kde-baseapps >= %{version}
-Requires: kdm
+Requires: kde-settings-plasma
+Requires: plasma-workspace
+Requires: kde-runtime
+Requires: kde-baseapps
+Requires: sddm
+Requires: sddm-breeze
+Requires: sddm-kcm
 Requires: ksysguardd
-Requires: oxygen-cursor-themes
-Requires: oxygen-icon-theme
+Requires: breeze-cursor-themes
+Requires: breeze-icon-theme
+# KDE4
+Requires: kdelibs
 
 # other 3rd party packages that are useful in Dom0...
 
