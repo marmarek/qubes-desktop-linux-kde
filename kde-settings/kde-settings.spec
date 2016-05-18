@@ -5,7 +5,7 @@
 %define kde_settings_epoch 0
 %endif
 
-%global rel 11
+%global rel 12
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
